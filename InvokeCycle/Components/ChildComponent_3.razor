@@ -1,0 +1,35 @@
+﻿<div class="child @(OnClick.HasDelegate ? "clickable" : "")" @onclick=OnClick>
+    <h5>ChildComponent_3</h5>
+    <p><span>@Text</span> -- @(OnClick.HasDelegate ? "Onclick has handle" : "Onclick unset")</p>
+</div>
+
+@code
+{
+    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    [Parameter] public string Text { get; set; } = "Unset";
+
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine("Child-3 - OnParametersSet");
+        base.OnParametersSet();
+    }
+
+    // protected override Task OnParametersSetAsync()
+    // {
+    //     Console.WriteLine("Child-2 - OnParametersSetAsync");
+    //     return base.OnParametersSetAsync();
+    // }
+
+    // protected override void OnAfterRender(bool firstRender)
+    // {
+    //     Console.WriteLine("Child-2 - OnAfterRender");
+    //     base.OnAfterRender(firstRender);
+    // }
+
+    // protected override Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //     Console.WriteLine("Child-2 - OnAfterRenderAsync");
+    //     return base.OnAfterRenderAsync(firstRender);
+    // }
+}

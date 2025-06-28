@@ -1,0 +1,21 @@
+﻿@if (ChildComponent is not null)
+{
+    <button title=@Text>
+        @ChildComponent
+    </button>
+}
+else
+{
+    <button title=@Text @onclick=OnClick>@Text</button>
+}
+
+
+
+@code
+{
+    [Parameter] public RenderFragment? ChildComponent { get; set; }
+
+    [Parameter] public EventCallback<MouseEventArgs> OnClick { get; set; }
+
+    [Parameter] public string Text { get; set; } = "Untitled";
+}

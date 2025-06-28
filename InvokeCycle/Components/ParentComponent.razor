@@ -1,0 +1,46 @@
+﻿<div class="ParentComponent">
+    <h3>Parent Component</h3>
+
+    <div class="experiment">
+        <ChildComponent_1 />
+        <ChildComponent_2 Text=@ParentString />
+        <ChildComponent_3 OnClick=@(() => Task.CompletedTask) Text=@ParentString/>
+        
+        @* These two below delegate their OnClick events to this parent-level method *@
+        <ChildComponent_4 OnClick=VoidMethod />
+        <ChildComponent_5 OnClick=VoidMethod Text=@ParentString />
+    </div>
+
+    <div class="button-control">
+        <Button Text=@($"Change number: {number}") OnClick=@(() => number = Random.Shared.Next(0, 1001)) />
+
+        <Button Text="Invoke Inline anonymous" OnClick=@(() => Console.WriteLine("* Parent * Inline anonymous invoked")) />
+
+        <Button Text="Invoke StateHasChanged" OnClick=StateHasChanged />
+
+        <Button Text="Invoke Void method" OnClick=VoidMethod />
+
+        <Button Text="Invoke Task method" OnClick=TaskMethod />
+    </div>
+</div>
+
+<button onclick="console.clear(); console.log('* Parent * Cleared console');">
+    Clear Console
+</button>
+
+@code
+{
+    private int number { get; set; }
+
+    private string? ParentString { get; set; } = "ParentString";
+
+    private void VoidMethod()
+    {
+        Console.WriteLine("* Parent * VoidMethod invoked!");
+    }
+    private Task TaskMethod()
+    {
+        Console.WriteLine("* Parent * TaskMethod invoked!");
+        return Task.CompletedTask;
+    }
+}
