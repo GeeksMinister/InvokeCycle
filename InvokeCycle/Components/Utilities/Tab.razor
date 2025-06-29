@@ -1,0 +1,31 @@
+@if (Parent.ActiveTabIndex == Index)
+{
+    <div class="Tab">
+        @ChildContent
+    </div>
+}
+
+@code
+{
+    [CascadingParameter] public required Tabs Parent { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    [Parameter] public string Title { get; set; } = " -- ";
+
+    [Parameter] public bool Enabled { get; set; } = true;
+    [Parameter] public bool IsActive { get; set; }
+
+    public int Index { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Parent == null) throw new ArgumentNullException(nameof(Parent), "Tab.razor must exist within a Tabs.razor");
+
+        if (!Parent.TabList.Contains(this))
+        {
+            await Parent.RegisterTab(this);            
+        }        
+        await base.OnInitializedAsync();
+    }
+}

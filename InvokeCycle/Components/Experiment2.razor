@@ -1,0 +1,39 @@
+﻿@inject IJSRuntime JS;
+@inject HttpClient Http;
+
+<div class="Experiment2">
+    <h3>Experiment 2</h3>
+    <div class="component-group">
+        <ChildComponent_1 OnClick=RandomTask Text="Task.CompletedTask" />
+        <ChildComponent_2 OnClick=RandomTask Text="Task.CompletedTask" />
+        <ChildComponent_3 OnClick=RandomTask Text="Task.CompletedTask" />
+        <ChildComponent_4 OnClick=RandomTask Text="Task.CompletedTask" />
+        <ChildComponent_5 OnClick=RandomTask Text="Task.CompletedTask" />
+    </div>
+    <div class="button-control">
+        <Button Text="Invoke ImportantTask" OnClick=RunImportantTask />
+    </div>
+</div>
+
+<button class="clear-btn" onclick="console.clear(); console.log('* Parent * Cleared console');">
+    Clear Console
+</button>
+
+@code
+{
+    private WeatherForecast[]? forecasts;
+
+    private async Task RunImportantTask()
+    {
+        Console.WriteLine("Starting complex task...");
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        await JS.LocalStorage_SetSerializedItem("weather-sample", forecasts);
+        Console.WriteLine("Complex task completed!"); Console.WriteLine("-End-");
+    }
+
+    private Task RandomTask() => Task.CompletedTask;
+
+}
+
+
+

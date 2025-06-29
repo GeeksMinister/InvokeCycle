@@ -1,0 +1,48 @@
+﻿::deep .Experiment1, ::deep .Experiment2 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+::deep .child {
+    background-color: #8556a3;
+    color: white;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+::deep .clickable {
+    cursor: pointer;
+}
+
+::deep .child .info {
+    font-size: 14px;
+    margin: 0;
+    color: #ffff38;
+    display: flex;
+    width: 20rem;
+    justify-content: space-between;
+}
+
+    ::deep .child .info span:first-child {
+        color: #ffbc41;
+    }
+
+::deep .button-control {
+    display: flex;
+    justify-content: space-evenly;
+    margin-block: 10px;
+}
+
+::deep .Experiment2 .button-control button:last-child {
+    background-color: #ff6a00;
+}
+
+::deep button.clear-btn {
+    margin: 1.5rem auto;
+    width: 100%;
+}

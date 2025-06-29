@@ -1,6 +1,6 @@
 ﻿<div class="child @(OnClick.HasDelegate ? "clickable" : "")" @onclick=OnClick>
     <h5>ChildComponent_2</h5>
-    <p><span>@Text</span> -- @(OnClick.HasDelegate ? "Onclick has handle" : "Onclick unset")</p>
+    <div class="info"><span>string : @Text</span><span>@(OnClick.HasDelegate ? "Onclick has handle" : "Onclick unset")</span></div>
 </div>
 
 @code
@@ -9,17 +9,17 @@
 
     [Parameter] public string Text { get; set; } = "Unset";
 
-    protected override void OnParametersSet()
-    {
-        Console.WriteLine("Child-2 - OnParametersSet");
-        base.OnParametersSet();
-    }
-
-    // protected override Task OnParametersSetAsync()
+    // protected override void OnParametersSet()
     // {
-    //     Console.WriteLine("Child-2 - OnParametersSetAsync");
-    //     return base.OnParametersSetAsync();
+    //     Console.WriteLine("Child-2 - OnParametersSet");
+    //     base.OnParametersSet();
     // }
+
+    protected override Task OnParametersSetAsync()
+    {
+        Console.WriteLine("Child-2 - OnParametersSetAsync");
+        return base.OnParametersSetAsync();
+    }
 
     // protected override void OnAfterRender(bool firstRender)
     // {

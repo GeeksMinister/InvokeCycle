@@ -1,0 +1,74 @@
+﻿
+@* Warning modifying component and applying hot reload will break the tabs*@
+
+<div class="Tabs">
+    <div class="tab-buttons">        
+        @* @foreach ((string id, int tabIndex, bool enabled, string title) tab in TabList) *@
+        @foreach (Tab tab in TabList)
+        {
+            <button @onclick=@(async() => await ActivateTab(tab)) disabled=@(!tab.Enabled) title=@tab.Title>
+                @tab.Title
+            </button>
+        }
+    </div>
+    <CascadingValue Value="this">
+        @if (ChildContent != null)
+        {
+            @ChildContent
+        }
+    </CascadingValue>
+</div>
+
+@code
+{
+    [Parameter] public int ActiveTabIndex { get; set; }
+    [Parameter] public EventCallback<int> ActiveTabIndexChanged { get; set; }
+
+    [Parameter] public EventCallback<int> OnTabChange { get; set; }
+
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    public List<Tab> TabList { get; set; } = [];
+    // public List<(string tabID, int tabIndex, bool enabled, string title)> TabList { get; set; } = [];
+    private bool TabsHaveRendered;
+
+    private async Task ActivateTab(Tab tab)
+    // private async Task ActivateTab(int index, bool enabled, string title)
+    {
+        if (!tab.Enabled) return;
+
+        ActiveTabIndex = tab.Index;
+        await OnTabChange.InvokeAsync((tab.Index));
+        await Task.CompletedTask;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            TabsHaveRendered = true;
+            StateHasChanged();
+        }
+        await Task.CompletedTask;
+    }
+
+    public Task RegisterTab(Tab tab)
+    {
+        if (!TabsHaveRendered && !TabList.Contains(tab))
+        {
+            tab.Index = TabList.Count;
+            TabList.Add(tab);
+        }
+        return Task.CompletedTask;
+    }
+
+    public Task RegisterTab(Tab tab, int tabIndex = 0)
+    {
+        if (!TabList.Contains(tab))
+        {
+            tab.Index = tabIndex;
+            TabList.Add(tab);
+        }
+        return Task.CompletedTask;
+    }
+}

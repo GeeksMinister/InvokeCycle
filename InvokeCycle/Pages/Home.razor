@@ -1,9 +1,13 @@
 ﻿@page "/"
 <PageTitle>Home</PageTitle>
 
-<ParentComponent />
-
-@code 
-{
-
-}
+<div>
+    <Tabs>
+        <Tab Title="Experiment 1">
+            <Experiment1 />
+        </Tab>
+        <Tab Title="Experiment 2">
+            <Experiment2 />
+        </Tab>
+    </Tabs>
+</div>

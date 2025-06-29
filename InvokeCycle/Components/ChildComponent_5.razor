@@ -1,6 +1,6 @@
-﻿<div class="child @(OnClick.HasDelegate ? "clickable" : "")" @onclick=OnClick>
+﻿<div class="child @(OnClick.HasDelegate ? "clickable" : "")" @onclick=OnClick @onclick:stopPropagation>
     <h5>ChildComponent_5</h5>
-    <p><span>@Text</span> -- @(OnClick.HasDelegate ? "Onclick has handle" : "Onclick unset")</p>
+    <div class="info"><span>string : @Text</span><span>@(OnClick.HasDelegate ? "Onclick has handle" : "Onclick unset")</span></div>
 </div>
 
 @code
@@ -9,27 +9,27 @@
 
     [Parameter] public string Text { get; set; } = "Unset";
 
-    protected override void OnParametersSet()
-    {
-        Console.WriteLine("Child-5 - OnParametersSet");
-        base.OnParametersSet();
-    }
-
-    // protected override Task OnParametersSetAsync()
+    // protected override void OnParametersSet()
     // {
-    //     Console.WriteLine("Child-2 - OnParametersSetAsync");
-    //     return base.OnParametersSetAsync();
+    //     Console.WriteLine("Child-5 - OnParametersSet");
+    //     base.OnParametersSet();
     // }
+
+    protected override Task OnParametersSetAsync()
+    {
+        Console.WriteLine("Child-5 - OnParametersSetAsync");
+        return base.OnParametersSetAsync();
+    }
 
     // protected override void OnAfterRender(bool firstRender)
     // {
-    //     Console.WriteLine("Child-2 - OnAfterRender");
+    //     Console.WriteLine("Child-5 - OnAfterRender");
     //     base.OnAfterRender(firstRender);
     // }
 
     // protected override Task OnAfterRenderAsync(bool firstRender)
     // {
-    //     Console.WriteLine("Child-2 - OnAfterRenderAsync");
+    //     Console.WriteLine("Child-5 - OnAfterRenderAsync");
     //     return base.OnAfterRenderAsync(firstRender);
     // }
 }
