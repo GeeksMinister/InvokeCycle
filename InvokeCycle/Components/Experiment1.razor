@@ -4,10 +4,6 @@
         <ChildComponent_1 />
         <ChildComponent_2 Text=@ParentString />
         <ChildComponent_3 OnClick=@(() => Task.CompletedTask) Text=@ParentString/> 
-            
-        @* These two below delegate have their OnClick event set to a method in parent-level 
-            They both will get all of their life cycle methods invoked except for Oninitialized() of course.
-        *@
         <p>
             These two below have OnClick event set to a method in parent-level
             They both will get their life cycle methods invoked except for Oninitialized().
@@ -28,6 +24,7 @@
         <Button Text="Invoke Task method" OnClick=TaskMethod />
     </div>
 </div>
+
 @code
 {
     private int number { get; set; }

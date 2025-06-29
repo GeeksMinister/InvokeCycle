@@ -3,3 +3,8 @@
     flex-direction: column;
     gap: 12px;
 }
+
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+}

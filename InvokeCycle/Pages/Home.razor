@@ -2,11 +2,11 @@
 @inject IJSRuntime JS;
 <PageTitle>Home</PageTitle>
 
-
-<pre>Please click on 'Experiment 1' or 'Experiment 2' two switch between tabs. 
-    You can view the invocations in the console in DevTools. 
+<pre>Please click on 'Experiment 1' or 'Experiment 2' to switch between tabs. 
+    You need to check the DevTools console to view the invocations. 
     Click the 'Clear console' at bottom to clear the console.
 </pre>
+
 <div>
     <Tabs>
         <Tab Title="Experiment 1">
@@ -19,10 +19,6 @@
 </div>
 
 @* <button class="clear-btn" @onclick="console.clear(); console.log('* Parent * Cleared console');"> *@
-<button class="clear-btn" @onclick=@(async () => 
-    {
-        await JS.InvokeVoidAsync("console.clear");
-        Console.WriteLine("* Parent * Cleared console");
-    })>
+<button class="clear-btn" @onclick=@(async () => await JS.InvokeVoidAsync("console.clear"))>
     Clear Console
 </button>

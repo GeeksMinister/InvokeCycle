@@ -4,26 +4,27 @@
 <div class="Experiment2">
     <h3>Experiment 2</h3>
     <div class="component-group">
-        <ChildComponent_1 OnClick=RandomTask Text="Task.CompletedTask" />
-        <ChildComponent_2 OnClick=RandomTask Text="Task.CompletedTask" />
-        <ChildComponent_3 OnClick=RandomTask Text="Task.CompletedTask" />
-        <ChildComponent_4 OnClick=RandomTask Text="Task.CompletedTask" />
-        <ChildComponent_5 OnClick=RandomTask Text="Task.CompletedTask" />
+        <ChildComponent_1 OnClick=RandomTask />
+        <ChildComponent_2 OnClick=RandomTask />
+        <ChildComponent_3 OnClick=RandomTask />
+        <ChildComponent_4 OnClick=RandomTask />
+        <ChildComponent_5 OnClick=RandomTask />
     </div>
     <div class="button-control">
         <Button Text="Invoke ImportantTask" OnClick=RunImportantTask />
     </div>
 </div>
+
 @code
 {
     private WeatherForecast[]? forecasts;
 
     private async Task RunImportantTask()
     {
-        Console.WriteLine("Starting complex task...");
+        Console.WriteLine("--Complex task started! --");
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
         await JS.LocalStorage_SetSerializedItem("weather-sample", forecasts);
-        Console.WriteLine("Complex task completed!"); Console.WriteLine("-End-");
+        Console.WriteLine("--Complex task Ended! --"); 
     }
 
     private Task RandomTask() => Task.CompletedTask;
