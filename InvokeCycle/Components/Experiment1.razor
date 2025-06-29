@@ -3,10 +3,15 @@
     <div class="component-group">
         <ChildComponent_1 />
         <ChildComponent_2 Text=@ParentString />
-        <ChildComponent_3 OnClick=@(() => Task.CompletedTask) Text=@ParentString/>        
+        <ChildComponent_3 OnClick=@(() => Task.CompletedTask) Text=@ParentString/> 
+            
         @* These two below delegate have their OnClick event set to a method in parent-level 
-            They both will get all of theri life cycle methods invoked except for Oninitialized() of course.
+            They both will get all of their life cycle methods invoked except for Oninitialized() of course.
         *@
+        <p>
+            These two below have OnClick event set to a method in parent-level
+            They both will get their life cycle methods invoked except for Oninitialized().
+        </p>
         <ChildComponent_4 OnClick=VoidMethod />                    
         <ChildComponent_5 OnClick=VoidMethod Text=@ParentString />
     </div>
@@ -23,11 +28,6 @@
         <Button Text="Invoke Task method" OnClick=TaskMethod />
     </div>
 </div>
-
-<button class="clear-btn" onclick="console.clear(); console.log('* Parent * Cleared console');">
-    Clear Console
-</button>
-
 @code
 {
     private int number { get; set; }

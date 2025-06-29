@@ -42,7 +42,7 @@
     background-color: #ff6a00;
 }
 
-::deep button.clear-btn {
+.clear-btn {
     margin: 1.5rem auto;
     width: 100%;
 }
