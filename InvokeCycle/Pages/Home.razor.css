@@ -19,6 +19,10 @@
     cursor: pointer;
 }
 
+    ::deep .clickable:hover {
+        background-color: #7560b5;
+    }
+
 ::deep .child .info {
     font-size: 14px;
     margin: 0;

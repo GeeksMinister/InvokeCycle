@@ -8,8 +8,8 @@
             These two below have OnClick event set to a method in parent-level
             They both will get their life cycle methods invoked except for Oninitialized().
         </p>
-        <ChildComponent_4 OnClick=VoidMethod />                    
-        <ChildComponent_5 OnClick=VoidMethod Text=@ParentString />
+        <ChildComponent_4 OnClick=EmptyTask />                    
+        <ChildComponent_5 OnClick=EmptyTask Text=@ParentString />
     </div>
 
     <div class="button-control">
@@ -35,9 +35,12 @@
     {
         Console.WriteLine("* Parent * VoidMethod invoked!");
     }
+
     private Task TaskMethod()
     {
         Console.WriteLine("* Parent * TaskMethod invoked!");
         return Task.CompletedTask;
     }
+
+    private Task EmptyTask() => Task.CompletedTask;
 }

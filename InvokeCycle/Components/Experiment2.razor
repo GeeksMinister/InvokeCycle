@@ -11,7 +11,8 @@
         <ChildComponent_5 OnClick=RandomTask />
     </div>
     <div class="button-control">
-        <Button Text="Invoke ImportantTask" OnClick=RunImportantTask />
+        <Button Text="Invoke RunActionMethod" OnClick=RunActionMethod />
+        <Button Text="Invoke RunTaskMethod" OnClick=RunTaskMethod />
     </div>
 </div>
 
@@ -19,16 +20,26 @@
 {
     private WeatherForecast[]? forecasts;
 
-    private async Task RunImportantTask()
+    private void RunActionMethod()
     {
-        Console.WriteLine("--Complex task started! --");
+        Console.WriteLine("--Important action started! --");
+        Enumerable.Range(1, 300).ToList().ForEach(i => Console.WriteLine("Action running"));
+        Console.WriteLine("--Important action Ended! --");
+    }
+
+    private bool PreventRender;
+    protected override bool ShouldRender() => !PreventRender;
+    private async Task RunTaskMethod()
+    {
+        // PreventRender = true;
+        Console.WriteLine("--Important task started! --");
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
         await JS.LocalStorage_SetSerializedItem("weather-sample", forecasts);
-        Console.WriteLine("--Complex task Ended! --"); 
+        Console.WriteLine("--Important task Ended! --");
+        // PreventRender = false;
     }
 
     private Task RandomTask() => Task.CompletedTask;
-
 }
 
 

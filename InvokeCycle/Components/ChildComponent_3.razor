@@ -27,9 +27,9 @@
     //     base.OnAfterRender(firstRender);
     // }
 
-    // protected override Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //     Console.WriteLine("Child-3 - OnAfterRenderAsync");
-    //     return base.OnAfterRenderAsync(firstRender);
-    // }
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        Console.WriteLine("Child-3 - OnAfterRenderAsync");
+        return base.OnAfterRenderAsync(firstRender);
+    }
 }
